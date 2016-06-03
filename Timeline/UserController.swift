@@ -11,7 +11,6 @@ import Foundation
 class UserController {
     var currentUser: User! = nil
     
-    //FINISH THIS IMPLEMENTATION
     
     static let sharedController = UserController()
     
@@ -58,7 +57,5 @@ class UserController {
     static func mockUsers() -> [User] {
         return [User.init(username: "Josh", identifier: "1"), User.init(username: "Ivette", identifier: "2"), User.init(username: "Jakob", identifier: nil)]
     }
-    
-    
     
 }
