@@ -9,13 +9,12 @@
 import Foundation
 
 class UserController {
-    var currentUser: User! = nil
-    
+    var currentUser: User? = nil
     
     static let sharedController = UserController()
     
     static func userForIdentifier(identifier: String, completion: (user: User?) -> Void) {
-        
+
     }
     
     static func fetchAllUsers(completion: (users: [User]) -> Void) {
@@ -34,12 +33,12 @@ class UserController {
         
     }
     
-    static func followedByUser(user: User, completion: ([User]?) -> Void) {
+    static func followedByUser(user: User, completion: (followed: [User]?) -> Void) {
         
     }
     
-    static func authenticateUser(email: String, password: String, completion: (User?) -> Bool) {
-        
+    static func authenticateUser(email: String, password: String, completion: (user: User?) -> Bool) {
+        completion(user: nil)
     }
     
     static func createUser(email: String, username: String, password: String, bio: String?, completion: (User?) -> Bool) {
