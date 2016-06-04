@@ -42,6 +42,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="1pb-JE-Eof" kind="presentation" identifier="loginSegue" id="FCo-TA-tmL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjH-CN-vei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -132,10 +135,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN7-qr-N6n">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="255"/>
                                                 <state key="normal" title="Log In"/>
+                                                <connections>
+                                                    <action selector="loginButtonPressed:" destination="1pb-JE-Eof" eventType="touchUpInside" id="wce-mJ-0Ky"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcf-hv-VWI">
                                                 <rect key="frame" x="300" y="0.0" width="300" height="255"/>
                                                 <state key="normal" title="Sign Up"/>
+                                                <connections>
+                                                    <action selector="signUpButtonPressed:" destination="1pb-JE-Eof" eventType="touchUpInside" id="ALq-aN-MG0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -171,7 +180,9 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0v-aS-JWQ">
                                         <rect key="frame" x="0.0" y="251" width="580" height="30"/>
-                                        <state key="normal" title="Action"/>
+                                        <connections>
+                                            <action selector="actionButtonTapped:" destination="1pb-JE-Eof" eventType="touchUpInside" id="ase-y5-ddU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -226,7 +237,6 @@
                         <segue destination="cKQ-3y-QST" kind="relationship" relationship="viewControllers" id="Ar3-mO-cay"/>
                         <segue destination="NKI-Px-NuY" kind="relationship" relationship="viewControllers" id="Bem-b2-9Qr"/>
                         <segue destination="OKd-qV-Y8z" kind="relationship" relationship="viewControllers" id="HtS-UE-wuV"/>
-                        <segue destination="1pb-JE-Eof" kind="presentation" identifier="SegueToLoginSignupViewController" id="0js-KC-XMy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRF-7e-NDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -299,10 +309,10 @@
             </objects>
             <point key="canvasLocation" x="2249" y="-607"/>
         </scene>
-        <!--User Search Table View Controller-->
+        <!--User Search Table Table View Controller-->
         <scene sceneID="l2c-Yn-Asv">
             <objects>
-                <tableViewController id="493-uD-xD4" customClass="UserSearchTableViewController" customModule="TimelineTests" sceneMemberID="viewController">
+                <tableViewController id="493-uD-xD4" customClass="UserSearchTableTableViewController" customModule="TimelineTests" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FriendCell" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ldJ-gI-OAf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -334,8 +344,14 @@
                                 <segment title="Friends"/>
                                 <segment title="Add Friend"/>
                             </segments>
+                            <connections>
+                                <action selector="selectedIndexChanged:" destination="493-uD-xD4" eventType="valueChanged" id="8Vt-qQ-zc7"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="modeSegmentedControl" destination="w1D-J3-JfS" id="Kim-lX-wFa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtZ-AF-rv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
