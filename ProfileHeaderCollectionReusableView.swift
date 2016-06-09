@@ -1,19 +1,22 @@
 //
-//  ProfileHeaderCollectionReusableViewDelegate.swift
+//  ProfileHeaderCollectionReusableView.swift
 //  Timeline
 //
 //  Created by Joshua Bates on 6/9/16.
 //  Copyright © 2016 DevMountain. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ProfileHeaderCollectionReusableViewDelegate {
+    
     func userTappedFollowActionButton()
     func userTappedURLButton()
+    
 }
 
 class ProfileHeaderCollectionReusableView: UICollectionReusableView {
+    
     
     
     var delegate: ProfileHeaderCollectionReusableViewDelegate?
@@ -26,24 +29,25 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         }
         
         if let url = user.url {
-            urlLabel.text = url
+            urlButton.setTitle(url, forState: .Normal)
         } else {
-            urlLabel.hidden = true
+            urlButton.hidden = true
         }
         
         if user == UserController.sharedController.currentUser {
             followButton.setTitle("Logout", forState: .Normal)
         } else {
-            UserController.userFollowsUser(UserController.sharedController.currentUser, user2: user, completion: { (follows) -> Void in
+            UserController.userFollowsUser(UserController.sharedController.currentUser, followsUser: user, completion: { (follows) -> Void in
                 if follows {
                     self.followButton.setTitle("Unfollow", forState: .Normal)
                 } else {
                     self.followButton.setTitle("Follow", forState: .Normal)
                 }
-        })
-        
-        
+            })
+            
+        }
     }
-        
-        
+    
+    
+    
 }
