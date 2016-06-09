@@ -12,7 +12,6 @@ class TimelineTableViewController: UITableViewController {
     
     var postsForUser = [Post]()
     
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         

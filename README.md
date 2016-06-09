@@ -350,7 +350,7 @@ One more step to get the segue working as expected. You need to update the ```pr
 
 Build a view to display details about any user of the app. The view will also allow the ```currentUser``` to update their profile photo, bio, or url. 
 
-##### Collection View Section Header
+/////////////////////////////////////// ##### Collection View Section Header
 
 1. Add a Collection View to the ```ProfileViewController``` scene in ```Main.storyboard```.
 2. Add a Collection Reusable View in the collection view.
