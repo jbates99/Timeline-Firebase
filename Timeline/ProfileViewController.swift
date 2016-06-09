@@ -9,17 +9,19 @@
 import UIKit
 import SafariServices
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource, ProfileHeaderCollectionReusableViewDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDataSource /*ProfileHeaderCollectionReusableViewDelegate */{
     
     var user: User?
     var userPosts: [Post] = []
     
+    @IBOutlet var collectionView: UICollectionView!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         if user == nil {
             user = UserController.sharedController.currentUser
-            editBarButtonItem.enabled = true
+           // editBarButtonItem.enabled = true
         }
         updateBasedOnUser()
     }
@@ -82,9 +84,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
             UserController.logOutCurrentUser()
             tabBarController?.selectedViewController = tabBarController?.viewControllers![0]
         } else {
-            UserController.userFollowsUser(UserController.sharedController.currentUser, user2: user) { (follows) -> Void in
+            UserController.userFollowsUser(UserController.sharedController.currentUser!, user2: user) { (follows) -> Void in
                 if follows {
-                    Usercontroller.unfollowUser(self.user!, completion: { (success) -> Void in
+                    UserController.unfollowUser(self.user!, completion: { (success) -> Void in
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.updateBasedOnUser()
                         })
@@ -106,7 +108,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
         if segue.identifier == "editUser" {
             let destinationViewController = segue.destinationViewController as? LoginSignupViewController
             _ = destinationViewController?.view
-            destinationViewController?.updateWithUser(user!)
+            //destinationViewController?.updateWithUser(user!)
         } else if segue.identifier == "profileToPostDetail" {
             if let cell = sender as? UICollectionViewCell, let indexPath = collectionView.indexPathForCell(cell) {
                 let post = userPosts[indexPath.item]

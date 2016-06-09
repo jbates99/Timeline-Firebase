@@ -14,6 +14,7 @@ class LoginSignupViewController: UIViewController {
     enum ViewMode {
         case signup
         case login
+        case edit
     }
     
 

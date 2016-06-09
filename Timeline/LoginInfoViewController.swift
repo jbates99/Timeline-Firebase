@@ -13,9 +13,11 @@ class LoginInfoViewController: UIViewController {
     enum ViewMode {
         case signup
         case login
+        case edit
     }
     
     var mode: ViewMode = .signup
+    var user: User?
     
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var urlTextField: UITextField!
@@ -26,15 +28,13 @@ class LoginInfoViewController: UIViewController {
     
     var fieldsAreValid: Bool {
         switch mode {
-        case .signup:
-            if !usernameTextField.text!.isEmpty && !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty {
-                return true
-            } else { return false }
-            
         case .login:
-            if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty {
-                return true
-            } else { return false }
+            return !(emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty)
+        case .signup:
+            return !(emailTextField.text!.isEmpty || usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty)
+        case .edit:
+            return !(usernameTextField.text!.isEmpty)
+            
             
         }
     }
@@ -52,38 +52,41 @@ class LoginInfoViewController: UIViewController {
     
     @IBAction func actionButtonTapped(sender: AnyObject) {
         
-        let alertController = UIAlertController(title: "Try Again", message: nil, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-        alertController.addAction(okAction)
         
-        guard fieldsAreValid else { return }
-        switch mode {
-        case .login:
-            UserController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (user) -> Bool in
-                if user != nil {
-                    
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    return true
-                } else {
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                    return false }
-            })
-        case .signup:
-            UserController.createUser(emailTextField.text!, username: usernameTextField.text!, password: passwordTextField.text!, bio: nil, completion: { (user) -> Bool in
-                if user != nil {
-                    
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    return true
-                } else {
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                    return false }
-            })
+        if fieldsAreValid {
+            switch mode {
+            case .login:
+                UserController.authenticateUser(emailTextField.text!, password: passwordTextField.text!, completion: { (success,user) -> Void in
+                    if success, let _ = user {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        self.presentValidatoinAlertWithTitle("Unable to Log In", message: "Please check your information and try again")
+                    }
+                })
+            case .signup:
+                UserController.createUser(emailTextField.text!, username: usernameTextField.text!, password: passwordTextField.text!, bio: bioTextField.text, url: urlTextField.text, completion: { (success, user) -> Void in
+                    if success, let _ = user {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        self.presentValidatoinAlertWithTitle("Unable to Signup", message: "Please check your information and try again")
+                    }
+                })
+            case .edit:
+                UserController.updateUser(self.user!, username: self.usernameTextField.text!, bio: self.bioTextField.text, url: self.urlTextField.text, completion: { (success, user) in
+                    if success {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        self.presentValidatoinAlertWithTitle("Unable to Update User", message: "Please check your information and try again")
+                    }
+                })
+            }
+        } else {
+            presentValidatoinAlertWithTitle("Missing Information", message: "Please check your information and try again")
             
         }
-        
     }
     
-    func updateViewBasedOnMode(){
+    func updateViewBasedOnMode() {
         switch mode {
         case .signup:
             actionButton.setTitle("Sign Up", forState: .Normal)
@@ -92,18 +95,29 @@ class LoginInfoViewController: UIViewController {
             usernameTextField.hidden = true
             bioTextField.hidden = true
             urlTextField.hidden = true
+        case .edit:
+            actionButton.setTitle("Update", forState: .Normal)
+            emailTextField.hidden = true
+            passwordTextField.hidden = true
+            
+            if let user = self.user {
+                usernameTextField.text = user.username
+                bioTextField.text = user.bio
+                urlTextField.text = user.url
+            }
         }
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    func presentValidatoinAlertWithTitle(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
 }
+
+
+
+
+    

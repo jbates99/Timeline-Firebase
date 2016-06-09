@@ -11,11 +11,11 @@ import Foundation
 
 class ImageController {
     
-    static func uploadImage(image: UIImage, completion: (String) -> Void) {
+    static func uploadImage(image: UIImage, completion: (identifier: String?) -> Void) {
         
     }
     
-    static func imageForIdentifier(identifier: String, completion: (UIImage?) -> Void) {
+    static func imageForIdentifier(identifier: String, completion: (image: UIImage?) -> Void) {
         
     }
     

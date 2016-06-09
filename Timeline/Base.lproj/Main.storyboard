@@ -452,7 +452,7 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="profileCollectionView" id="zc2-0q-ava">
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="profileCollectionView" id="zc2-0q-ava" customClass="ProfileHeaderCollectionReusableView" customModule="Timeline" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="114" width="600" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -468,6 +468,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qjb-ZG-0Q0">
                                                     <rect key="frame" x="82" y="0.0" width="250" height="42"/>
                                                     <state key="normal" title="Homepage"/>
+                                                    <connections>
+                                                        <action selector="urlButtonTapped:" destination="zc2-0q-ava" eventType="touchUpInside" id="708-dh-BU4"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFQ-kK-vX3">
                                                     <rect key="frame" x="331" y="0.0" width="270" height="42"/>
@@ -493,6 +496,12 @@
                                         <constraint firstItem="8Ro-Ro-ekv" firstAttribute="leading" secondItem="zc2-0q-ava" secondAttribute="leading" id="ivq-tG-mIp"/>
                                         <constraint firstAttribute="trailing" secondItem="8Ro-Ro-ekv" secondAttribute="trailing" id="qDy-VX-pWT"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="bioLabel" destination="ITy-v9-owB" id="d8p-yT-Kni"/>
+                                        <outlet property="followActionButtonTapped" destination="OFQ-kK-vX3" id="Fv0-z2-CvM"/>
+                                        <outlet property="followButton" destination="OFQ-kK-vX3" id="Tb5-kP-LJf"/>
+                                        <outlet property="urlButton" destination="Qjb-ZG-0Q0" id="76e-Bi-GRt"/>
+                                    </connections>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="OKd-qV-Y8z" id="8XJ-Lc-oiT"/>
@@ -509,6 +518,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="aKR-ta-0rT"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ahk-J4-Lmr" id="w5O-Dw-CqO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SR-5q-zNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

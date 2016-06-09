@@ -21,15 +21,15 @@ class UserController {
         
     }
     
-    static func followUser(user: User, completion: () -> Bool) {
+    static func followUser(user: User, completion: (success: Bool) -> Void) {
         
     }
     
-    static func unfollowUser(user: User, completion: () -> Bool) {
+    static func unfollowUser(user: User, completion: (success: Bool) -> Void) {
         
     }
     
-    static func userFollowsUser(user: User, user2: User, completion: () -> Bool) {
+    static func userFollowsUser(user: User, user2: User, completion: (follows: Bool) -> Void) {
         
     }
     
@@ -37,15 +37,15 @@ class UserController {
         
     }
     
-    static func authenticateUser(email: String, password: String, completion: (user: User?) -> Bool) {
-        completion(user: nil)
+    static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
+        completion(success: false, user: nil)
     }
     
-    static func createUser(email: String, username: String, password: String, bio: String?, completion: (User?) -> Bool) {
+    static func createUser(email: String, username: String, password: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
         
     }
     
-    static func updateUser(user: User, username: String, bio: String?, completion: (User?) -> Bool) {
+    static func updateUser(user: User, username: String, bio: String?, url: String?, completion: (success: Bool, user:User?) -> Void) {
         
     }
     
