@@ -10,6 +10,9 @@ import Foundation
 import Firebase
 
 class UserController {
+    
+    private let kUser = "userKey"
+    
     var currentUser: User? = nil
     
     static let sharedController = UserController()
