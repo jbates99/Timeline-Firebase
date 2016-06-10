@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class UserController {
     var currentUser: User? = nil
@@ -14,7 +15,7 @@ class UserController {
     static let sharedController = UserController()
     
     static func userForIdentifier(identifier: String, completion: (user: User?) -> Void) {
-
+        
     }
     
     static func fetchAllUsers(completion: (users: [User]) -> Void) {
@@ -38,8 +39,25 @@ class UserController {
     }
     
     static func authenticateUser(email: String, password: String, completion: (success: Bool, user: User?) -> Void) {
-        completion(success: false, user: nil)
+        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+            if error != nil {
+                print("Unsuccessful login attempt.")
+                completion(success: false, user: nil)
+            } else {
+                guard let uid = user?.uid else { return }
+                print("User ID: \(uid) authenticated successfully.")
+                UserController.userForIdentifier((uid), completion: { (user) -> Void in
+                    if let user = user {
+                        sharedController.currentUser = user
+                    }
+                    completion(success: true, user: user)
+                })
+            }
+        }
     }
+    
+    
+    
     
     static func createUser(email: String, username: String, password: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
         
@@ -54,7 +72,7 @@ class UserController {
     }
     
     static func mockUsers() -> [User] {
-        return [User.init(username: "Josh", identifier: "1"), User.init(username: "Ivette", identifier: "2"), User.init(username: "Jakob", identifier: nil)]
+        return [User(username: "Josh", identifier: "1"), User(username: "Ivette", identifier: "2"), User(username: "Jakob", identifier: nil)]
     }
     
 }
