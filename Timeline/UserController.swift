@@ -56,9 +56,6 @@ class UserController {
         }
     }
     
-    
-    
-    
     static func createUser(email: String, username: String, password: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
         
     }
@@ -69,10 +66,6 @@ class UserController {
     
     static func logOutCurrentUser() {
         
-    }
-    
-    static func mockUsers() -> [User] {
-        return [User(username: "Josh", identifier: "1"), User(username: "Ivette", identifier: "2"), User(username: "Jakob", identifier: nil)]
     }
     
 }
