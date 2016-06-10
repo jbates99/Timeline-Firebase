@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource /*ProfileHeaderCollectionReusableViewDelegate */{
+class ProfileViewController: UIViewController, UICollectionViewDataSource, ProfileHeaderCollectionReusableViewDelegate {
     
     var user: User?
     var userPosts: [Post] = []
