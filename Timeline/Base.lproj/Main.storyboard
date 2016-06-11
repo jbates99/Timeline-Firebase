@@ -10,19 +10,55 @@
         <scene sceneID="cEu-ZK-Mm0">
             <objects>
                 <tableViewController title="Timeline" id="6fe-JC-X8r" customClass="TimelineTableViewController" customModule="Timeline" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="n0C-jq-1cb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="301" sectionHeaderHeight="28" sectionFooterHeight="28" id="n0C-jq-1cb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimelineCell" id="fHr-WO-fdP">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimelineCell" rowHeight="301" id="fHr-WO-fdP" customClass="PostTableViewCell" customModule="Timeline" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="301"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fHr-WO-fdP" id="30h-9L-8pg">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="300.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="774-YK-shV">
+                                            <rect key="frame" x="8" y="8" width="584" height="285"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a8A-Ar-I94">
+                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="285"/>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CDF-ac-LnX">
+                                                    <rect key="frame" x="292" y="0.0" width="292" height="285"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGE-dH-RIM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="292" height="143"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qny-ix-dCM">
+                                                            <rect key="frame" x="0.0" y="143" width="292" height="143"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="774-YK-shV" firstAttribute="trailing" secondItem="30h-9L-8pg" secondAttribute="trailingMargin" id="0K0-K2-gzl"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="774-YK-shV" secondAttribute="bottom" constant="-0.5" id="7n4-qb-F3x"/>
+                                        <constraint firstItem="774-YK-shV" firstAttribute="top" secondItem="30h-9L-8pg" secondAttribute="topMargin" id="TU9-cb-o9U"/>
+                                        <constraint firstItem="774-YK-shV" firstAttribute="leading" secondItem="30h-9L-8pg" secondAttribute="leadingMargin" id="pfz-ug-77A"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="commentsLabel" destination="qny-ix-dCM" id="qLf-1S-Crc"/>
+                                    <outlet property="likesLabel" destination="jGE-dH-RIM" id="qCV-RO-1fL"/>
+                                    <outlet property="postImageView" destination="a8A-Ar-I94" id="JKc-vJ-rqe"/>
                                     <segue destination="Fmx-LR-IPc" kind="show" identifier="timelineToPostDetail" id="SEA-bR-X7R"/>
                                 </connections>
                             </tableViewCell>
