@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol ProfileHeaderCollectionReusableViewDelegate {
     
-    func userTappedFollowActionButton()
-    func userTappedURLButton()
+    func followButtonPressed()
+    func urlButtonPressed()
     
 }
 
@@ -53,6 +54,12 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         }
     }
     
+    @IBAction func urlButtonPressed(sender: AnyObject) {
+        delegate?.urlButtonPressed()
+    }
     
+    @IBAction func followButtonPressed(sender: AnyObject) {
+        delegate?.followButtonPressed()
+    }
     
 }

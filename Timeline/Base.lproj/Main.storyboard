@@ -469,10 +469,16 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZW-7l-3WJ">
                                                     <rect key="frame" x="42" y="0.0" width="456" height="34"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="urlButtonPressed:" destination="zhr-pP-Mzg" eventType="touchUpInside" id="GEp-cf-FAb"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2S8-Q4-IIh">
                                                     <rect key="frame" x="498" y="0.0" width="46" height="34"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="followButtonPressed:" destination="zhr-pP-Mzg" eventType="touchUpInside" id="Krq-uA-6JI"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
         
         if user == nil {
             user = UserController.sharedController.currentUser
-           // editBarButtonItem.enabled = true
+            // editBarButtonItem.enabled = true
         }
         updateBasedOnUser()
     }
@@ -70,15 +70,13 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
         
         return headerView
     }
-    
-    func userTappedURLButton() {
+    func urlButtonPressed() {
         if let profileURL = NSURL(string: user!.url!) {
             let safariViewController = SFSafariViewController(URL: profileURL)
             presentViewController(safariViewController, animated: true, completion: nil)
         }
     }
-    
-    func userTappedFollowActionButton() {
+    func followButtonPressed() {
         guard let user = user else { return }
         if user == UserController.sharedController.currentUser {
             UserController.logOutCurrentUser()
@@ -103,8 +101,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
     }
     
     // MARK: - Navigation
- 
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editUser" {
             let destinationViewController = segue.destinationViewController as? LoginSignupViewController
             _ = destinationViewController?.view
@@ -116,6 +114,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
                 destinationViewController?.post = post
             }
         }
-     }
+    }
     
 }
