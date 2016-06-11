@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource, ProfileHeaderCollectionReusableViewDelegate {
+class ProfileViewController: UIViewController {
     
     var user: User?
     var userPosts: [Post] = []
@@ -24,11 +24,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
             // editBarButtonItem.enabled = true
         }
         updateBasedOnUser()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func updateBasedOnUser() {
@@ -52,6 +47,25 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
         
     }
     
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editUser" {
+            let destinationViewController = segue.destinationViewController as? LoginSignupViewController
+            _ = destinationViewController?.view
+            //destinationViewController?.updateWithUser(user!)
+        } else if segue.identifier == "profileToPostDetail" {
+            if let cell = sender as? UICollectionViewCell, let indexPath = collectionView.indexPathForCell(cell) {
+                let post = userPosts[indexPath.item]
+                let destinationViewController = segue.destinationViewController as? PostDetailTableViewController
+                destinationViewController?.post = post
+            }
+        }
+    }
+    
+}
+
+extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userPosts.count
     }
@@ -70,12 +84,18 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
         
         return headerView
     }
+    
+}
+
+extension ProfileViewController: ProfileHeaderCollectionReusableViewDelegate {
+    
     func urlButtonPressed() {
         if let profileURL = NSURL(string: user!.url!) {
             let safariViewController = SFSafariViewController(URL: profileURL)
             presentViewController(safariViewController, animated: true, completion: nil)
         }
     }
+    
     func followButtonPressed() {
         guard let user = user else { return }
         if user == UserController.sharedController.currentUser {
@@ -99,21 +119,4 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, Profi
             }
         }
     }
-    
-    // MARK: - Navigation
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editUser" {
-            let destinationViewController = segue.destinationViewController as? LoginSignupViewController
-            _ = destinationViewController?.view
-            //destinationViewController?.updateWithUser(user!)
-        } else if segue.identifier == "profileToPostDetail" {
-            if let cell = sender as? UICollectionViewCell, let indexPath = collectionView.indexPathForCell(cell) {
-                let post = userPosts[indexPath.item]
-                let destinationViewController = segue.destinationViewController as? PostDetailTableViewController
-                destinationViewController?.post = post
-            }
-        }
-    }
-    
 }
