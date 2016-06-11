@@ -9,11 +9,12 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
-    //imageView
+    
+    @IBOutlet weak var imageView: UIImageView!
     
     func updateWithImageIdentifier(identifier: String) {
         ImageController.imageForIdentifier(identifier) { (image) -> Void in
-            // self.imageView.image = image
+            self.imageView.image = image
         }
     }
 }
