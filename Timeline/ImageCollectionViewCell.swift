@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
-    
+    //imageView
     
     func updateWithImageIdentifier(identifier: String) {
         ImageController.imageForIdentifier(identifier) { (image) -> Void in

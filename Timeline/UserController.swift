@@ -115,18 +115,19 @@ class UserController {
     }
     
     static func createUser(email: String, username: String, password: String, bio: String?, url: String?, completion: (success: Bool, user: User?) -> Void) {
-        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (response, error) -> Void in
-            if let response = response {
+        FIRAuth.auth()?.createUserWithEmail(email, password: password) { response, error in
+            
+            if let response = response where error == nil {
                 var user = User(username: username, uid: String(response.uid), bio: bio, url: url, identifier: String(response.uid))
                 user.save()
-                authenticateUser(email, password: password, completion: { (success, user) -> Void in
+                authenticateUser(email, password: password) { success, user in
                     completion(success: success, user: user)
-                })
-                
+                }
             } else {
+                print(error)
                 completion(success: false, user: nil)
             }
-        })
+        }
     }
     
     static func updateUser(user: User, username: String, bio: String?, url: String?, completion: (success: Bool, user:User?) -> Void) {

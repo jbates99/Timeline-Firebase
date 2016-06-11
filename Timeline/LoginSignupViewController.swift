@@ -23,6 +23,12 @@ class LoginSignupViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if UserController.sharedController.currentUser != nil {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -30,11 +36,11 @@ class LoginSignupViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("loginSelected", sender: nil)
+       // performSegueWithIdentifier("loginSelected", sender: nil)
         
     }
     @IBAction func signUpButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("signupSelected", sender: nil)
+        //performSegueWithIdentifier("signupSelected", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

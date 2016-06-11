@@ -11,6 +11,8 @@ import UIKit
 class PostDetailTableViewController: UITableViewController {
     
     var post: Post?
+    //likesLabel
+    //commentLabel
     
     override func viewDidLoad() {
         super.viewDidLoad()

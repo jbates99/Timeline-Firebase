@@ -9,6 +9,10 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
+    //postImageView
+    //likesLabel
+    //commentsLabel
 
     func updateWithPost(post: Post) {
 //        self.postImageView.image = nil
